@@ -1,0 +1,12 @@
+{
+  "name": "WebMapSwitcher",
+  "label": "WebMap Switcher",
+  "platform": "HTML",
+  "version": "2.3",
+  "wabVersion": "2.3",
+  "author": "GBS/Shaun Weston",
+  "description": "Switch the webmap being used.",
+  "copyright": "",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "properties": {}
+}

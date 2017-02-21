@@ -1,2 +1,0 @@
-# Widget Source Code #
-Widget source code is to be managed using the documented structure as prescribed by Esri at the following [link](https://developers.arcgis.com/web-appbuilder/guide/required-files.htm "link").

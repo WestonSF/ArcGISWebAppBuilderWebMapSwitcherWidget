@@ -1,0 +1,26 @@
+<div style="width:100%;height:100%;">
+    <div class="settings-section" data-dojo-attach-point="searchesSection">
+        <table class="setting-table input-table" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="first">${nls.groupLabel}</td>
+                    <td class="second">
+                        <input type="text" data-dojo-type="dijit/form/ValidationTextBox"
+                               data-dojo-attach-point="mapGroupID"
+                               required="true" data-dojo-props="style:{width:'100%'}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="first">${nls.groupAccessLabel}</td>
+                    <td class="second">
+                        <select data-dojo-attach-point="groupAccessChoice" data-dojo-type="dijit/form/Select">
+                            <option value="Public">${nls.groupAccessPublicLabel}</option>
+                            <option value="Organisation">${nls.groupAccessOrganisationLabel}</option>
+                            <option value="Private">${nls.groupAccessPrivateLabel}</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
