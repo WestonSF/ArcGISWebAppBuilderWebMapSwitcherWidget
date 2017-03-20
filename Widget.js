@@ -61,20 +61,20 @@ define([
 
             // If public group
             if (groupAccess.toLowerCase() == "public") {
-                this.renderThemeSwitcher(portal, groupId);
+                this.renderThemeSwitcher(portal, groupId, groupAccess);
             }
             // If secured group, need to sign in
             else {
                 console.log('Signing in to access the secure group...');
 
                 portal.signIn().then(function (loggedInUser) {
-                    setupGroup.renderThemeSwitcher(portal,groupId);
+                    setupGroup.renderThemeSwitcher(portal, groupId, groupAccess);
                 });
             }
         },
 
         // Load the map switcher
-        renderThemeSwitcher: function (portal,groupId) {
+        renderThemeSwitcher: function (portal, groupId, groupAccess) {
             var renderThemeSwitcher = this;
             var map = this.map;
             var themeObjs = [];
@@ -127,13 +127,13 @@ define([
                                 label: renderThemeSwitcher.nls.confirm,
                                 onClick: lang.hitch(renderThemeSwitcher, function () {
                                     popup.close();
-                                    renderThemeSwitcher._switchWebMap(b)
+                                    renderThemeSwitcher._switchWebMap(b, groupAccess)
                                 })
                             }]
                         });
                         return false;
                     } else {
-                        renderThemeSwitcher._switchWebMap(b)
+                        renderThemeSwitcher._switchWebMap(b, groupAccess)
                     }
 
                 });
@@ -141,15 +141,23 @@ define([
         },
 
         // Switch the map
-        _switchWebMap: function (b) {
+        _switchWebMap: function (b, groupAccess) {
             console.log('Switching the webmap...');
             var switchWebMap = this;
             this.appConfig.map.itemId = b.itemId;
             this.appConfig.map.mapOptions.extent = this.map.extent;
             this.appConfig._drawnGraphics = false;
-            portal.signIn().then(function (loggedInUser) {
+
+            // If public group
+            if (groupAccess.toLowerCase() == "public") {
                 MapManager.getInstance()._recreateMap(switchWebMap.appConfig);
-            });
+            }
+            // Private group
+            else {
+                portal.signIn().then(function (loggedInUser) {
+                    MapManager.getInstance()._recreateMap(switchWebMap.appConfig);
+                });
+            }
         },
 
         destroythemesDijit: function() {
